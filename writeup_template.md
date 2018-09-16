@@ -130,6 +130,8 @@ Here's a [link to my video result](./output_videos/project_video.mp4)
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
-
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+1. This pipeline's line detection via gradients and color thresholding is noisy
+2. In the challenge video, I see that this pipeline detects lines in the middle of the lane due to different colored asphalt on the road.
+3. This can be avoided by expecting the base of the max bins while histogramming to be at a minimum distance.
+4. The line detection also fails under very bright light conditions. The lane lines are noisy when the car drives in a patch of road which is under bright sunlight.
+5. To handle those error, I would have to use smoothing of the line from previously calculated line pixels.
