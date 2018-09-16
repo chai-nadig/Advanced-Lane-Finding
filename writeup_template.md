@@ -23,6 +23,7 @@ The goals / steps of this project are the following:
 [test2_warped]: ./output_images/test2_warped.jpg "test2_warped.jpg"
 [test2_linepixels]: ./output_images/test2_linepixels.jpg "test2_linepixels.jpg"
 [test2_linepixels_fit_overplotted]: ./output_images/test2_linepixels_fit_overplotted.jpg "test2_linepixels_fit_overplotted.jpg"
+[test2_lane_detected]: ./output_images/test2.jpg "test2_lane_detected.jpg"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
@@ -97,20 +98,25 @@ The goals / steps of this project are the following:
 
 1. The radius of curvature and the position of the vehicle is calculated in the 18th code cell.
 2. The radius of curvature is calculated individually for each of the lane lines.
-3. We get the radius in real world space as the line pixels are converted from image space to real world.
+3. We get the radius in real world space in **meters** as the line pixels are converted from image space to real world.
 4. The convertion rate is as follows
 
 | **axis** | **real world distance**| **image space reference**|
 |:--------:|:--------:|:--------------------------------------:|
-| x-axis | 3.7m | width between the base points of each of the lane lines |
-| y-axis | 30m  | approximate distance of the lane as seen in the bird's eye warped image of the lane |
+| x-axis | 3.7 meters | width between the base points of each of the lane lines |
+| y-axis | 30 meters  | approximate distance of the lane as seen in the bird's eye warped image of the lane |
 
 
-#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. Lane detection in unwarped image
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+1. The lane detected in the warped image is then unwarped and projected onto the real image.
+2. This is done in the `unwarp_lane_lines_to_frame` function in code cell 15.
+3. The final result looks like this - 
 
-![alt text][image6]
+| **test2_undistorted.jpg** | **test2_lane_detected.jpg** |
+|:--------------------:|:--------------------------------:|
+|![alt text][test2_undistorted] | ![alt text][test2_lane_detected]
+
 
 ---
 
