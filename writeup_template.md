@@ -98,13 +98,15 @@ The goals / steps of this project are the following:
 
 1. The radius of curvature and the position of the vehicle is calculated in the 18th code cell.
 2. The radius of curvature is calculated individually for each of the lane lines.
-3. We get the radius in real world space in **meters** as the line pixels are converted from image space to real world.
-4. The convertion rate is as follows
+3. The average of the two radii is the radius of curvature at the center of the vehicle.
+4. We get the radius in real world space in **meters** as the line pixels are converted from image space to real world.
+5. The convertion rate is as follows
 
 | **axis** | **real world distance**| **image space reference**|
 |:--------:|:--------:|:--------------------------------------:|
 | x-axis | 3.7 meters | width between the base points of each of the lane lines |
 | y-axis | 30 meters  | approximate distance of the lane as seen in the bird's eye warped image of the lane |
+
 
 
 #### 6. Lane detection in unwarped image
@@ -122,9 +124,7 @@ The goals / steps of this project are the following:
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
-
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_videos/project_video.mp4)
 
 ---
 
