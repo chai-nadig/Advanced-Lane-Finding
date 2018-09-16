@@ -21,7 +21,8 @@ The goals / steps of this project are the following:
 [test2_undistorted]: ./output_images/test2_undistorted.jpg "test2_undistorted.jpg"
 [test2_binary]: ./output_images/test2_binary.jpg "test2_binary.jpg"
 [test2_warped]: ./output_images/test2_warped.jpg "test2_warped.jpg"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
+[test2_linepixels]: ./output_images/test2_linepixels.jpg "test2_linepixels.jpg"
+[test2_linepixels_fit_overplotted]: ./output_images/test2_linepixels_fit_overplotted.jpg "test2_linepixels_fit_overplotted.jpg"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
@@ -73,22 +74,37 @@ The goals / steps of this project are the following:
 | 580, 450      | 230, 0        |
 
 2. The code for perspective transform is in code cell 8.
-3. The result of perspective transform on the original image looks like this - 
+3. The result of perspective transform on the original image and the binary thresholded image look like this -  
 
-| **test2.jpg** | **test2_warped.jpg** |
-|:-----------------:|:------------------------:|
-|![alt text][test2] | ![alt text][test2_warped]
+| **test2.jpg** | **test2_warped.jpg** | **test2_linepixels.jpg** |
+|:-----------------:|:------------------------:|:----------------:|
+|![alt text][test2] | ![alt text][test2_warped]|![alt text][test2_linepixels]
 
 
-#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Identify lane-line pixels and fit a polynomial
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+1. The lane pixels in the binary warped image `test2_linepixels.jpg` were identified using a histogram and moving window algorithm.
+2. The code for this is in the 11th code cell under the `find_lane_pixels` function.
+3. To optimize on line detection, there's also a `find_lane_pixels_prior` function which detects lines in a binary warped image around an line that's already detected. This code is in the 12th code cell.
+4. The following image visualizes how the line detection looks. The detected line pixels are colored in red and blue.
+5. The code to draw the lane line pixels is in code cell 13 under `draw_lane_lines`.
 
-![alt text][image5]
+| **test2_linepixels.jpg** | **test2_linepixels_fit_overplotted.jpg** |
+|:--------------------:|:--------------------------------:|
+|![alt text][test2_linepixels] | ![alt text][test2_linepixels_fit_overplotted]
 
-#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+#### 5. Radius of curvature and position of vehicle
 
-I did this in lines # through # in my code in `my_other_file.py`
+1. The radius of curvature and the position of the vehicle is calculated in the 18th code cell.
+2. The radius of curvature is calculated individually for each of the lane lines.
+3. We get the radius in real world space as the line pixels are converted from image space to real world.
+4. The convertion rate is as follows
+
+| **axis** | **real world distance**| **image space reference**|
+|:--------:|:--------:|:--------------------------------------:|
+| x-axis | 3.7m | width between the base points of each of the lane lines |
+| y-axis | 30m  | approximate distance of the lane as seen in the bird's eye warped image of the lane |
+
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
