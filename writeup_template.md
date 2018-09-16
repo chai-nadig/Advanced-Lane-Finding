@@ -16,9 +16,10 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [undistorted_calibration1]: ./output_images/calibration1.jpg "undistorted_calibration1.jpg"
-[calibration1]: ./camera_cal/calibration1.jpg "calibration1"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
+[calibration1]: ./camera_cal/calibration1.jpg "calibration1.jpg"
+[test2]: ./test_images/test2.jpg "test2.jpg"
+[test2_undistorted]: ./output_images/test2_undistorted.jpg "test2_undistorted.jpg"
+[test2_binary]: ./output_images/test2_binary.jpg "test2_binary.jpg"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
@@ -37,12 +38,26 @@ The goals / steps of this project are the following:
 
 ### Pipeline (single images)
 
-#### 1. Provide an example of a distortion-corrected image.
+#### 1. Distortion corrected image
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
+* Here's an example test image undistorted after calibration.
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+| **test2.jpg** | **test2_undistorted.jpg** |
+|:--------------------:|:--------------------------------:|
+|![alt text][test2] | ![alt text][test2_undistorted]
+
+#### 2. Color transforms and gradients thresholding
+
+1. For color thresholding, images were converted from RGB space to HLS space
+2. The S-channel was extracted and min and max threshold of 170 and 255 was applied.
+3. For gradient thresholding, images were converted to grayscale and sobel operator was applied along the x-axis.
+4. All gradients with a min and max threshold of 20 and 100 were retained.
+5. The two thresholded images were then combined to render one binary image.
+
+| **test2_undistorted.jpg** | **test2_binary.jpg** |
+|:--------------------:|:--------------------------------:|
+|![alt text][test2_undistorted] | ![alt text][test2_binary]
+
 
 I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
